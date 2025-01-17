@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Состояние нажатой кнопки -->
+    <item android:state_pressed="true">
+        <layer-list>
+            <!-- Нижний прозрачный слой для увеличения области нажатия -->
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@android:color/transparent" /> <!-- Прозрачный фон -->
+                    <padding
+                        android:top="10dp"
+                        android:bottom="10dp" /> <!-- Прозрачные зазоры только сверху и снизу -->
+                </shape>
+            </item>
+
+            <!-- Основной слой с фоном и скругленными углами -->
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/primary" /> <!-- Фон кнопки -->
+                    <stroke android:color="#00000000" android:width="10dp"/> <!-- Прозрачный контур -->
+                    <corners android:radius="15dp" /> <!-- Радиус скругления углов -->
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <!-- Обычное состояние кнопки -->
+    <item android:state_pressed="false">
+        <layer-list>
+            <!-- Нижний прозрачный слой для увеличения области нажатия -->
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@android:color/transparent" /> <!-- Прозрачный фон -->
+                    <padding
+                        android:top="5dp"
+                        android:bottom="5dp" /> <!-- Прозрачные зазоры только сверху и снизу -->
+                </shape>
+            </item>
+
+            <!-- Основной слой с фоном и скругленными углами -->
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/primary" /> <!-- Фон кнопки -->
+                    <corners android:radius="15dp" /> <!-- Радиус скругления углов -->
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>
