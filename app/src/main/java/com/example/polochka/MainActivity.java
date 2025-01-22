@@ -9,7 +9,6 @@ import android.os.Bundle;
 
 import com.example.polochka.Fragments.FavoriteFragment;
 import com.example.polochka.Fragments.MainFragment;
-import com.example.polochka.Fragments.MessagesFragment;
 import com.example.polochka.Fragments.NewItemFragment;
 import com.example.polochka.Fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -47,12 +46,10 @@ public class MainActivity extends AppCompatActivity {
         switch (itemId) {
             case R.id.nav_main:
                 return new MainFragment();
-            case R.id.nav_messages:
-                return new MessagesFragment();
             case R.id.nav_new_item:
                 return new NewItemFragment();
-            case R.id.nav_profile:
-                return new ProfileFragment();
+//            case R.id.nav_profile:
+//                return new ProfileFragment();
             case R.id.nav_saved:
                 return new FavoriteFragment();
         }
