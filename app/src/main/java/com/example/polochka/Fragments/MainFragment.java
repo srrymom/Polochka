@@ -65,7 +65,7 @@ public class MainFragment extends Fragment implements ItemRecyclerViewAdapter.On
     private void getBooksFromServer() {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(SERVER_URL)  // Здесь указываете URL вашего API
+                .url(SERVER_URL +"/books")  // Здесь указываете URL вашего API
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -97,11 +97,23 @@ public class MainFragment extends Fragment implements ItemRecyclerViewAdapter.On
                         ArrayList<ItemModel> newItems = new ArrayList<>();
                         for (int i = 0; i < booksArray.length(); i++) {
                             JSONObject bookObject = booksArray.getJSONObject(i);
-                            String title = bookObject.getString("title");
-                            String author = bookObject.getString("author");  // Или другой ключ, если у вас другая структура
 
-                            // Добавляем в список
-                            newItems.add(new ItemModel(title, author));
+                            // Извлекаем данные из JSON-объекта
+                            int id = bookObject.getInt("id");
+                            String title = bookObject.getString("title");
+                            String author = bookObject.getString("author");
+                            String description = bookObject.getString("description");
+                            String city = bookObject.getString("city");
+                            String district = bookObject.optString("district", null);
+                            double latitude = bookObject.getDouble("latitude");
+                            double longitude = bookObject.getDouble("longitude");
+                            String phoneNumber = bookObject.getString("phone_number");
+                            String username = bookObject.optString("username", null);
+                            String imageId = bookObject.optString("image_id", null);
+
+                            // Создаем новый объект и добавляем его в список
+                            newItems.add(new ItemModel(id, title, author, description, city, district, latitude, longitude, phoneNumber, username, String.valueOf(id)));
+
                         }
 
                         // Обновляем интерфейс с новыми данными

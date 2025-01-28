@@ -59,10 +59,10 @@ public class FavoriteFragment extends Fragment  implements ItemRecyclerViewAdapt
         String[] userNames = getResources().getStringArray(R.array.user_names);
         String[] bookTitles = getResources().getStringArray(R.array.book_titles);
 
-        for (int i = 0; i < userNames.length; i++) {
-            // Создаем ItemModel с именем пользователя и названием книги
-            models.add(new ItemModel(bookTitles[i], userNames[i]));
-        }
+//        for (int i = 0; i < userNames.length; i++) {
+//            // Создаем ItemModel с именем пользователя и названием книги
+//            models.add(new ItemModel(bookTitles[i], userNames[i]));
+//        }
 
         return models;
     }

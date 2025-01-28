@@ -9,8 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.polochka.LocationDetailsListener;
-import com.example.polochka.UserLocationManager;
+import com.example.polochka.utils.LocationDetailsListener;
+import com.example.polochka.utils.UserLocationManager;
 import com.yandex.mapkit.geometry.Point;
 import com.yandex.mapkit.map.CameraListener;
 import com.yandex.mapkit.map.CameraPosition;

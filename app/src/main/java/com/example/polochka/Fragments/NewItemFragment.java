@@ -1,22 +1,26 @@
 package com.example.polochka.Fragments;
 
+import android.net.Uri;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.polochka.utils.ImageSender;
+import com.example.polochka.utils.ServerCommunicator;
 import com.example.polochka.views.CustomMapView;
-import com.example.polochka.LocationDetailsListener;
+import com.example.polochka.utils.LocationDetailsListener;
 import com.example.polochka.R;
 import com.yandex.mapkit.MapKitFactory;
-
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,46 +29,48 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class NewItemFragment extends Fragment implements LocationDetailsListener {
-
     private EditText userNameInput, userNumberInput, titleInput, authorInput, descriptionInput;
     private TextView cityLabel, districtLabel;
-    private Button submitButton;;
+    private Button submitButton, btnPickImage;
+    private ImageView previewImage;
     private CustomMapView mapView;
-    private  String SERVER_URL;
 
-    public NewItemFragment() {
-        // Required empty public constructor
+    private ServerCommunicator serverCommunicator;
+    private ImageHandler imageHandler;
+
+    private ImageSender imageSender;
+
+    public void setImageUri(Uri image_uri) {
+        this.imageUri = image_uri;
     }
-    public static NewItemFragment newInstance(String param1, String param2) {
-        NewItemFragment fragment = new NewItemFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
+
+    private Uri imageUri;
+
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         MapKitFactory.initialize(getContext());
-        SERVER_URL = getContext().getString(R.string.server_url);
-
-
-
         View view = inflater.inflate(R.layout.fragment_new_item, container, false);
 
+        // Инициализация
+        initializeViews(view);
+        serverCommunicator = new ServerCommunicator(getContext().getString(R.string.server_url));
+        ImageHandler imageHandler = new ImageHandler(this, previewImage, this::setImageUri);
 
-        mapView = view.findViewById(R.id.mapview);
+        imageSender = new ImageSender(requireContext(), requireActivity());
+
+        // Установка обработчиков
+        submitButton.setOnClickListener(v -> sendBookToServer());
+        btnPickImage.setOnClickListener(v -> imageHandler.pickImage());
+
         mapView.start(requireContext(), requireActivity(), this);
+        return view;
+    }
 
-        // Initialize input fields and button
+    private void initializeViews(View view) {
         titleInput = view.findViewById(R.id.bookTitleInput);
         authorInput = view.findViewById(R.id.bookAuthorInput);
         descriptionInput = view.findViewById(R.id.bookDescriptionInput);
@@ -73,35 +79,14 @@ public class NewItemFragment extends Fragment implements LocationDetailsListener
         districtLabel = view.findViewById(R.id.districtLabel);
         userNumberInput = view.findViewById(R.id.userNumberInput);
         userNameInput = view.findViewById(R.id.userNameInput);
-
-        // Set up button click listener
-        submitButton.setOnClickListener(v -> sendBookToServer());
-
-        return view;
+        btnPickImage = view.findViewById(R.id.addPicButton);
+        previewImage = view.findViewById(R.id.imagePreview);
+        mapView = view.findViewById(R.id.mapview);
     }
 
 
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Start MapKit and the map view lifecycle
-        MapKitFactory.getInstance().onStart();
-        if (mapView != null) {
-            mapView.onStart();
-        }
-    }
-
-    @Override
-    public void onStop() {
-        // Stop MapKit and the map view lifecycle
-        if (mapView != null) {
-            mapView.onStop();
-        }
-        MapKitFactory.getInstance().onStop();
-        super.onStop();
-    }
     private void sendBookToServer() {
+        // Сбор данных
         String title = titleInput.getText().toString().trim();
         String author = authorInput.getText().toString().trim();
         String description = descriptionInput.getText().toString().trim();
@@ -111,62 +96,93 @@ public class NewItemFragment extends Fragment implements LocationDetailsListener
         String userNumber = userNumberInput.getText().toString().trim();
         double latitude = mapView.getLatitude();
         double longitude = mapView.getLongitude();
-        Log.e("longitude", String.valueOf(longitude));
 
-        // Check if any fields are empty
-        if (title.isEmpty() || author.isEmpty() || description.isEmpty() || userName.isEmpty() || userNumber.isEmpty()) {
+        if (validateInputs(title, author, description, userName, userNumber)) {
             Toast.makeText(getContext(), "Все поля должны быть заполнены", Toast.LENGTH_SHORT).show();
             return;
         }
-        JSONObject jsonPayload = new JSONObject();
+
         try {
-            jsonPayload.put("title", title);
-            jsonPayload.put("author", author);
-            jsonPayload.put("description", description);
-            jsonPayload.put("city", city);
-            jsonPayload.put("district", district);
-            jsonPayload.put("username", userName);
-            jsonPayload.put("phone_number", userNumber);
-            jsonPayload.put("latitude", latitude);
-            jsonPayload.put("longitude", longitude);
+            JSONObject payload = new JSONObject();
+            payload.put("title", title);
+            payload.put("author", author);
+            payload.put("description", description);
+            payload.put("city", city);
+            payload.put("district", district);
+            payload.put("username", userName);
+            payload.put("phone_number", userNumber);
+            payload.put("latitude", latitude);
+            payload.put("longitude", longitude);
+
+            // Отправка данных
+            serverCommunicator.sendBook(payload, new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    handleServerError(e);
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    handleServerResponse(response);
+                }
+            });
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
 
+    private boolean validateInputs(String... inputs) {
+        for (String input : inputs) {
+            if (input.isEmpty()) return true;
+        }
+        return false;
+    }
 
-        // Send data to the server
-        OkHttpClient client = new OkHttpClient();
-        RequestBody body = RequestBody.create(String.valueOf(jsonPayload), MediaType.get("application/json; charset=utf-8"));
-        Request request = new Request.Builder()
-                .url(SERVER_URL)
-                .post(body)
-                .build();
+    private void handleServerError(IOException e) {
+        getActivity().runOnUiThread(() ->
+                Toast.makeText(getContext(), "Ошибка отправки данных: " + e.getMessage(), Toast.LENGTH_LONG).show()
+        );
+    }
 
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                // Log error for debugging
-                Log.e("NewItemFragment", "Ошибка при отправке данных на сервер", e);
-
-                // Show error in Toast
-                getActivity().runOnUiThread(() -> {
-                    String errorMessage = "Ошибка отправки данных на сервер: " + e.getMessage();
-                    Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
-                });
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                // Handle server response
-                if (response.isSuccessful()) {
-                    getActivity().runOnUiThread(() ->
-                            Toast.makeText(getContext(), "Книга успешно отправлена!", Toast.LENGTH_SHORT).show());
-                } else {
-                    getActivity().runOnUiThread(() ->
-                            Toast.makeText(getContext(), "Ошибка сервера: " + response.code(), Toast.LENGTH_SHORT).show());
-                }
-            }
+    private void handleServerResponse(Response response) {
+        getActivity().runOnUiThread(() -> {
+            String message = response.isSuccessful() ? "Книга успешно отправлена!" : "Ошибка сервера: " + response.code();
+            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
         });
+
+        try {
+            // Извлекаем JSON-ответ
+            String responseBody = response.body().string();
+            JSONObject jsonResponse = new JSONObject(responseBody);
+
+            // Получаем book_id из ответа
+            String bookId = jsonResponse.getString("book_id");
+
+            if (imageUri != null) {
+                // Отправляем изображение на сервер
+                imageSender.sendImageToServer(imageUri, bookId);
+            }
+
+
+        } catch (Exception e) {
+            Log.e("NewItemFragment", "Ошибка при обработке ответа", e);
+            Toast.makeText(getContext(), "Ошибка: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        MapKitFactory.getInstance().onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        mapView.onStop();
+        MapKitFactory.getInstance().onStop();
+        super.onStop();
     }
 
     @Override
@@ -177,6 +193,5 @@ public class NewItemFragment extends Fragment implements LocationDetailsListener
     @Override
     public void onDistrictChanged(String district) {
         districtLabel.setText(district);
-
     }
 }
