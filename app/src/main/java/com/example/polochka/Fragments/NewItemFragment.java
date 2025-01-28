@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.polochka.utils.ImageSender;
 import com.example.polochka.utils.ServerCommunicator;
@@ -67,7 +68,9 @@ public class NewItemFragment extends Fragment implements LocationDetailsListener
         btnPickImage.setOnClickListener(v -> imageHandler.pickImage());
 
         mapView.start(requireContext(), requireActivity(), this);
+
         return view;
+
     }
 
     private void initializeViews(View view) {
@@ -168,6 +171,11 @@ public class NewItemFragment extends Fragment implements LocationDetailsListener
             Log.e("NewItemFragment", "Ошибка при обработке ответа", e);
             Toast.makeText(getContext(), "Ошибка: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+
+        FragmentManager fragmentManager = getParentFragmentManager();
+        if (fragmentManager.getBackStackEntryCount() > 1) {
+            fragmentManager.popBackStack();}
+
     }
 
 

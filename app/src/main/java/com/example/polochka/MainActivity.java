@@ -97,8 +97,8 @@ public class MainActivity extends AppCompatActivity  {
                 return new NewItemFragment();
 //            case R.id.nav_profile:
 //                return new ProfileFragment();
-            case R.id.nav_saved:
-                return new FavoriteFragment();
+//            case R.id.nav_saved:
+//                return new FavoriteFragment();
         }
         return null;
     }

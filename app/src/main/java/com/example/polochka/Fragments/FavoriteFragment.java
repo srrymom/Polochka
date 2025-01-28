@@ -56,8 +56,8 @@ public class FavoriteFragment extends Fragment  implements ItemRecyclerViewAdapt
     // Метод для добавления элементов в список избранных
     private ArrayList<ItemModel> setUpFavoriteItems() {
         ArrayList<ItemModel> models = new ArrayList<>();
-        String[] userNames = getResources().getStringArray(R.array.user_names);
-        String[] bookTitles = getResources().getStringArray(R.array.book_titles);
+//        String[] userNames = getResources().getStringArray(R.array.user_names);
+//        String[] bookTitles = getResources().getStringArray(R.array.book_titles);
 
 //        for (int i = 0; i < userNames.length; i++) {
 //            // Создаем ItemModel с именем пользователя и названием книги

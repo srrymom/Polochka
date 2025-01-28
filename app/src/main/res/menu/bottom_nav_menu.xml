@@ -6,9 +6,9 @@
         android:id="@+id/nav_main"
         android:icon="@drawable/search"
         android:title="Главная" />
-    <item android:title="Избранное"
-        android:icon="@drawable/heart"
-        android:id="@+id/nav_saved"/>
+<!--    <item android:title="Избранное"-->
+<!--        android:icon="@drawable/heart"-->
+<!--        android:id="@+id/nav_saved"/>-->
     <item android:title="Объявление"
         android:icon="@drawable/add_post"
         android:id="@+id/nav_new_item"/>

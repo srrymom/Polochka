@@ -46,21 +46,23 @@
                 <TextView
                     android:id="@+id/bookCardTitle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
+                    android:layout_height="20dp"
+                    android:text="TextViewццц ццццццц ц"
+                    android:singleLine="true"
                     android:textSize="18dp" />
 
                 <TextView
+                    android:layout_marginTop="6dp"
                     android:id="@+id/bookCardPlace"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="22dp"
                     android:text="TextView"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/bookCardDateTime"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="22dp"
                     android:text="TextView"
                     android:textSize="14sp" />
             </LinearLayout>

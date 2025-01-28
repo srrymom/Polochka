@@ -28,11 +28,11 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:scaleType="centerCrop"
                         android:id="@+id/imagePreview"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
                         android:background="@color/light_gray"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/ic_launcher_foreground"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +43,7 @@
                         android:id="@+id/addPicButton"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
+                        android:background="@color/black"
                         android:padding="10dp"
                         app:cornerRadius="2dp"
                         app:icon="@drawable/add"
@@ -79,6 +80,7 @@
 
             <EditText
                 android:id="@+id/userNameInput"
+
                 style="@style/DefaultEditTextStyle"
                 android:hint="Как к вам обращаться" />
 
@@ -96,9 +98,13 @@
 
             <TextView
                 android:id="@+id/cityLabel"
+                android:paddingTop="10dp"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 style="@style/DefaultEditTextStyle" />
             <TextView
                 android:id="@+id/districtLabel"
+                android:textSize="18dp"
                 style="@style/DefaultEditTextStyle"/>
 
             <Button

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.polochka.R;
 
 import java.util.ArrayList;
@@ -56,6 +57,9 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
 
         Glide.with(this.context)
                 .load(SERVER_URL + "/images/" + itemModels.get(position).getimageId()) // указываем URL изображения
+                .placeholder(R.drawable.small_book_placeholder2)  // Укажите ресурс изображения для плейсхолдера
+                .diskCacheStrategy(DiskCacheStrategy.NONE)  // Отключить кэширование
+
                 .into(holder.previewImage);
 
         // Устанавливаем обработчик клика для элемента
