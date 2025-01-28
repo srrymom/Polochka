@@ -146,6 +146,10 @@ async def upload_file(file: UploadFile = File(...), book_id: str = Form(...)):
     file_extension = os.path.splitext(file.filename)[1]
     file_path = os.path.join(images_dir, f"{book_id}{file_extension}")
 
+    # Явное удаление файла, если он существует
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
     with open(file_path, "wb") as f:
         f.write(await file.read())
 
