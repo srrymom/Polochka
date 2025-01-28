@@ -81,7 +81,7 @@ async def create_book(book: BookRequest, session: AsyncSession = Depends(get_ses
     title = capitalize_first_letter(book.title)
     author = capitalize_first_letter(book.author)
     username = capitalize_first_letter(book.username)
-    city = shorten_city_name(capitalize_first_letter(book.city))
+    city = capitalize_first_letter(shorten_city_name(book.city))
     district = capitalize_first_letter(book.district)
 
     new_book = BookModel(
@@ -112,6 +112,30 @@ async def get_all_books(session: AsyncSession = Depends(get_session)):
         raise HTTPException(status_code=404, detail="No books found.")
 
     return {"books": [book.__dict__ for book in books]}
+
+@app.delete("/books/{book_id}")
+async def delete_book(book_id: int, session: AsyncSession = Depends(get_session)):
+    # Выполним запрос на получение книги по ID
+    query = select(BookModel).filter(BookModel.id == book_id)
+    result = await session.execute(query)
+    book = result.scalar_one_or_none()
+
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+
+    # Пытаемся удалить связанный файл, если он есть
+    if book.image_id:
+        file_path = os.path.join(BASE_DIR, "imgs", str(book.image_id))
+        file_path = file_path+".jpg"
+        if os.path.exists(file_path):
+            os.remove(file_path)
+
+
+    # Удаляем книгу из базы данных
+    await session.delete(book)
+    await session.commit()
+
+    return {"status": "Книга и изображение удалены успешно"}
 
 # Загрузка изображений
 @app.post("/upload")
