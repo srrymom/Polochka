@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.polochka.CustomMapView;
+import com.example.polochka.views.CustomMapView;
 import com.example.polochka.LocationDetailsListener;
 import com.example.polochka.R;
 import com.yandex.mapkit.MapKitFactory;

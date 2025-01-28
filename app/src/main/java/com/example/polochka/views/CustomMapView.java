@@ -1,4 +1,4 @@
-package com.example.polochka;
+package com.example.polochka.views;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.polochka.LocationDetailsListener;
+import com.example.polochka.UserLocationManager;
 import com.yandex.mapkit.geometry.Point;
 import com.yandex.mapkit.map.CameraListener;
 import com.yandex.mapkit.map.CameraPosition;

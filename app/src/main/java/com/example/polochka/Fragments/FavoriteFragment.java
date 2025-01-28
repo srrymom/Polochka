@@ -11,8 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.polochka.ItemModel;
-import com.example.polochka.ItemRecyclerViewAdapter;
+import com.example.polochka.models.ItemModel;
+import com.example.polochka.adapters.ItemRecyclerViewAdapter;
 import com.example.polochka.R;
 
 import java.util.ArrayList;

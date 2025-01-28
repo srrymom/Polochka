@@ -1,4 +1,4 @@
-package com.example.polochka;
+package com.example.polochka.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.polochka.R;
+
 import java.util.ArrayList;
+
+import com.example.polochka.models.ItemModel;
 
 public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerViewAdapter.MyViewHolder> {
     Context context;

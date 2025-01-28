@@ -1,4 +1,4 @@
-package com.example.polochka;
+package com.example.polochka.models;
 
 public class ItemModel {
 

@@ -87,7 +87,7 @@
                 android:hint="Номер телефона"
                 android:inputType="phone" />
 
-            <com.example.polochka.CustomMapView
+            <com.example.polochka.views.CustomMapView
                 android:id="@+id/mapview"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
