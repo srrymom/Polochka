@@ -94,15 +94,28 @@ async def create_book(book: BookRequest, session: AsyncSession = Depends(get_ses
     return {"status": "Book added successfully", "book_id": new_book.id}
 
 
-# Маршрут для поиска книг
+# # Маршрут для поиска книг
+# @app.get("/books/")
+# async def search_books(title: str, session: AsyncSession = Depends(get_session)):
+#     # Используем ORM-запрос вместо "raw SQL" для безопасности
+#     query = select(BookModel).where(BookModel.title.ilike(f"%{title}%"))
+#     result = await session.execute(query)
+#     books = result.scalars().all()
+#
+#     if not books:
+#         raise HTTPException(status_code=404, detail="No books found matching the title.")
+#
+#     return {"books": [book.__dict__ for book in books]}
+
+
 @app.get("/books/")
-async def search_books(title: str, session: AsyncSession = Depends(get_session)):
-    # Используем ORM-запрос вместо "raw SQL" для безопасности
-    query = select(BookModel).where(BookModel.title.ilike(f"%{title}%"))
+async def get_all_books(session: AsyncSession = Depends(get_session)):
+    # Запрашиваем все книги
+    query = select(BookModel)
     result = await session.execute(query)
     books = result.scalars().all()
 
     if not books:
-        raise HTTPException(status_code=404, detail="No books found matching the title.")
+        raise HTTPException(status_code=404, detail="No books found.")
 
     return {"books": [book.__dict__ for book in books]}

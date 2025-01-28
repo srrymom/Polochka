@@ -18,10 +18,17 @@ import com.example.polochka.models.ItemModel;
 public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerViewAdapter.MyViewHolder> {
     Context context;
     ArrayList<ItemModel> itemModels;
+    private OnItemClickListener listener; // Слушатель для кликов
 
-    public ItemRecyclerViewAdapter(Context context, ArrayList<ItemModel> itemModels) {
+    // Интерфейс для обработки кликов
+    public interface OnItemClickListener {
+        void onItemClick(ItemModel item);
+    }
+    // Конструктор адаптера с добавлением слушателя
+    public ItemRecyclerViewAdapter(Context context, ArrayList<ItemModel> itemModels, OnItemClickListener listener) {
         this.context = context;
         this.itemModels = itemModels;
+        this.listener = listener; // Устанавливаем слушатель
     }
 
     @NonNull
@@ -34,8 +41,13 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        ItemModel item = itemModels.get(position);
+
         holder.titleTextView.setText(itemModels.get(position).getBookTitle());
         holder.nameTextView.setText(itemModels.get(position).getUserName());
+        // Устанавливаем обработчик клика для элемента
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(item)); // Передаем выбранный элемент
+
     }
 
     @Override

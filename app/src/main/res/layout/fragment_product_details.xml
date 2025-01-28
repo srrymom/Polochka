@@ -18,31 +18,33 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/llDescription"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llAuthor">
+            app:layout_constraintTop_toBottomOf="@+id/lBookNameAuthor">
 
-            <TextView
-                android:id="@+id/itemDescriptionLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:id="@+id/itemDescriptionLabel"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="TextView"-->
+<!--                android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/itemDescriptionText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Raz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz Raz dvaRaz dvaRaz dvaRaz dvaRaz dva Raz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dva  dvaRazdvaRazdvaRazdvaRaz dvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazvv dva" />
+<!--            <TextView-->
+<!--                android:id="@+id/itemDescriptionText"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Raz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz Raz dvaRaz dvaRaz dvaRaz dvaRaz dva Raz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dva  dvaRazdvaRazdvaRazdvaRaz dvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazvv dva" />-->
 
             <TextView
                 android:id="@+id/bookDescriptionLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="Описание книги"
                 android:textStyle="bold" />
 
             <TextView
@@ -84,7 +86,7 @@
             app:layout_constraintTop_toBottomOf="@id/cardProductImages">
 
             <TextView
-                android:id="@+id/tvBookName"
+                android:id="@+id/tvBookTitle"
                 style="@style/TextAppearance.MaterialComponents.Headline5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -99,56 +101,55 @@
                 android:text="Some author" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/llItemButtons"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lBookNameAuthor">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/llItemButtons"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginEnd="10dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/lBookNameAuthor">-->
 
-            <Button
-                android:id="@+id/itemMessageBtn"
-                style="@style/MessageButtonStyle"
-                android:text="Message" />
+<!--            <Button-->
+<!--                android:id="@+id/itemMessageBtn"-->
+<!--                style="@style/MessageButtonStyle"-->
+<!--                android:text="Message" />-->
 
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="0dp" />
+<!--            <Space-->
+<!--                android:layout_width="10dp"-->
+<!--                android:layout_height="0dp" />-->
 
-            <Button
-                android:id="@+id/itemFavoriteBtn"
-                style="@style/FavoriteButtonStyle"
-                android:text="Save" />
-        </LinearLayout>
+<!--            <Button-->
+<!--                android:id="@+id/itemFavoriteBtn"-->
+<!--                style="@style/FavoriteButtonStyle"-->
+<!--                android:text="Save" />-->
+<!--        </LinearLayout>-->
 
         <LinearLayout
             android:id="@+id/llAuthor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llItemButtons">
+            app:layout_constraintTop_toBottomOf="@id/llDescription">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="50dp">
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:cardCornerRadius="50dp">-->
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    app:shapeAppearance="@style/ShapeAppearanceOverlay.Avatar" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView"-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    app:shapeAppearance="@style/ShapeAppearanceOverlay.Avatar" />-->
 
-            </androidx.cardview.widget.CardView>
+<!--            </androidx.cardview.widget.CardView>-->
 
 
             <LinearLayout
@@ -158,12 +159,14 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/userName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Фамилия имя"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/userNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Фамилия имя" />
@@ -173,13 +176,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
-        app:itemIconTint="@drawable/navigation_view_colored"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

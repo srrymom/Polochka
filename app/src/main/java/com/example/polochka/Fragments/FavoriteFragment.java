@@ -11,13 +11,14 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.polochka.MainActivity;
 import com.example.polochka.models.ItemModel;
 import com.example.polochka.adapters.ItemRecyclerViewAdapter;
 import com.example.polochka.R;
 
 import java.util.ArrayList;
 
-public class FavoriteFragment extends Fragment {
+public class FavoriteFragment extends Fragment  implements ItemRecyclerViewAdapter.OnItemClickListener {
 
     private RecyclerView recyclerView;
     private ArrayList<ItemModel> favoriteItems;
@@ -46,7 +47,7 @@ public class FavoriteFragment extends Fragment {
 
 
         // Установка адаптера
-        ItemRecyclerViewAdapter adapter = new ItemRecyclerViewAdapter(getContext(), favoriteItems);
+        ItemRecyclerViewAdapter adapter = new ItemRecyclerViewAdapter(getContext(), favoriteItems, this);
         recyclerView.setAdapter(adapter);
 
         return view;
@@ -64,5 +65,13 @@ public class FavoriteFragment extends Fragment {
         }
 
         return models;
+    }
+
+    @Override
+    public void onItemClick(ItemModel item) {
+        ProductDetailsFragment fragment = ProductDetailsFragment.newInstance(item);
+        if (getActivity() != null) {
+            ((MainActivity) getActivity()).makeCurrentFragment(fragment);
+        }
     }
 }

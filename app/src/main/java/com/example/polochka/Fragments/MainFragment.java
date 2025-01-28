@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.polochka.MainActivity;
 import com.example.polochka.models.ItemModel;
 import com.example.polochka.adapters.ItemRecyclerViewAdapter;
 import com.example.polochka.R;
@@ -28,11 +29,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements ItemRecyclerViewAdapter.OnItemClickListener {
 
     private RecyclerView recyclerView;
     private ArrayList<ItemModel> items = new ArrayList<>();
     private  String SERVER_URL;
+    private ItemRecyclerViewAdapter adapter;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -48,7 +50,8 @@ public class MainFragment extends Fragment {
         // Инициализация фрагмента
         View view = inflater.inflate(R.layout.fragment_favorite, container, false);
 
-        // Инициализация RecyclerView
+
+
         recyclerView = view.findViewById(R.id.favoriteRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
@@ -125,8 +128,15 @@ public class MainFragment extends Fragment {
         items.clear();
         items.addAll(newItems);
 
-        // Установка адаптера
-        ItemRecyclerViewAdapter adapter = new ItemRecyclerViewAdapter(getContext(), items);
+        // Инициализация RecyclerView
+        adapter = new ItemRecyclerViewAdapter(getContext(), items, this);
         recyclerView.setAdapter(adapter);
     }
-}
+
+    @Override
+    public void onItemClick(ItemModel item) {
+        ProductDetailsFragment fragment = ProductDetailsFragment.newInstance(item);
+        if (getActivity() != null) {
+            ((MainActivity) getActivity()).makeCurrentFragment(fragment);
+        }
+    }}

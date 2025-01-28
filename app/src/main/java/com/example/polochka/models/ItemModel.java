@@ -1,6 +1,8 @@
 package com.example.polochka.models;
 
-public class ItemModel {
+import java.io.Serializable;
+
+public class ItemModel  implements Serializable {
 
     private String bookTitle;       // Название книги
     private String userName;        // Имя пользователя

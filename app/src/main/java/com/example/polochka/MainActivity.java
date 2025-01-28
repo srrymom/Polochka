@@ -19,7 +19,7 @@ import com.example.polochka.Fragments.NewItemFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.yandex.mapkit.MapKitFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     private BottomNavigationView bottomNavigationView;
     private static final int REQUEST_LOCATION_PERMISSION = 1001;
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         makeCurrentFragment(new MainFragment());
     }
 
-    private void makeCurrentFragment(Fragment fragment) {
+    public void makeCurrentFragment(Fragment fragment) {
         // Метод для замены фрагментов
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
