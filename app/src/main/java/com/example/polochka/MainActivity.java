@@ -2,6 +2,7 @@ package com.example.polochka;
 
 import static java.security.AccessController.getContext;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -10,17 +11,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.example.polochka.Fragments.FavoriteFragment;
 import com.example.polochka.Fragments.MainFragment;
 import com.example.polochka.Fragments.NewItemFragment;
-import com.example.polochka.Fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.yandex.mapkit.MapKitFactory;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,6 +62,21 @@ public class MainActivity extends AppCompatActivity {
 
         // Настройка BottomNavigationView
         setUpBottomNavigation();
+
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> {
+            // Check if the fragment stack has entries
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            if (fragmentManager.getBackStackEntryCount() > 1) {
+                fragmentManager.popBackStack(); // Go back to the previous fragment
+            }
+//            else {
+//                // Optionally, finish the activity or perform other actions
+//                backPressed(); // or finish() to close the Activity
+//            }
+        });
+
+
     }
 
     private void setUpBottomNavigation() {
@@ -101,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fl_wrapper, fragment); // Контейнер для фрагментов
+        fragmentTransaction.addToBackStack(null); // Add to back stack
         fragmentTransaction.commit();
     }
+
 }

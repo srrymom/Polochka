@@ -37,7 +37,7 @@ public class NewItemFragment extends Fragment implements LocationDetailsListener
     private TextView cityLabel, districtLabel;
     private Button submitButton;;
     private CustomMapView mapView;
-    private static final String SERVER_URL = "http://127.0.0.1:8000/books/";
+    private  String SERVER_URL;
 
     public NewItemFragment() {
         // Required empty public constructor
@@ -54,6 +54,7 @@ public class NewItemFragment extends Fragment implements LocationDetailsListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         MapKitFactory.initialize(getContext());
+        SERVER_URL = getContext().getString(R.string.server_url);
 
 
 

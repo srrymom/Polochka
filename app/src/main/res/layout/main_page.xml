@@ -6,6 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:id="@+id/upperBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backButton"
+            android:layout_width="57dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:padding="0dp"
+            app:backgroundTint="@color/white"
+            app:cornerRadius="2dp"
+            app:icon="@drawable/arrow_back"
+            app:iconGravity="textStart"
+            app:iconSize="20dp"
+            app:iconTint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:strokeColor="@color/gray" />
+    </LinearLayout>
+
     <FrameLayout
         android:id="@+id/fl_wrapper"
         android:layout_width="0dp"
@@ -13,7 +45,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView">
+        app:layout_constraintTop_toBottomOf="@+id/upperBar">
 
     </FrameLayout>
 
@@ -31,13 +63,5 @@
         app:itemPaddingTop="10dp"
         app:itemActiveIndicatorStyle="@null"
         app:menu="@menu/bottom_nav_menu" />
-
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
