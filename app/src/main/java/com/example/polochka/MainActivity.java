@@ -1,8 +1,6 @@
 package com.example.polochka;
 
-import static java.security.AccessController.getContext;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -13,9 +11,9 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Button;
 
-import com.example.polochka.Fragments.FavoriteFragment;
 import com.example.polochka.Fragments.MainFragment;
 import com.example.polochka.Fragments.NewItemFragment;
+import com.example.polochka.utils.UserLocationManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.yandex.mapkit.MapKitFactory;
 
@@ -46,6 +44,9 @@ public class MainActivity extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        UserLocationManager locationManager = new UserLocationManager(this);
+        locationManager.getUserLocation(this, null);
+
         super.onCreate(savedInstanceState);
 
         String apiKey = "6d4f46d0-123a-47c0-b6f1-e082e11a9472"; // todo: спрятать ключ

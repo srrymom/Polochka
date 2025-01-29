@@ -1,5 +1,7 @@
 package com.example.polochka.Fragments;
 
+
+
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -40,7 +42,6 @@ public class NewItemFragment extends Fragment implements LocationDetailsListener
     private CustomMapView mapView;
 
     private ServerCommunicator serverCommunicator;
-    private ImageHandler imageHandler;
 
     private ImageSender imageSender;
 
@@ -53,6 +54,8 @@ public class NewItemFragment extends Fragment implements LocationDetailsListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
         MapKitFactory.initialize(getContext());
         View view = inflater.inflate(R.layout.fragment_new_item, container, false);
 
