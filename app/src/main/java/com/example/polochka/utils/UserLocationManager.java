@@ -44,15 +44,18 @@ public class UserLocationManager {
             );
             return;
         }
-        fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
-            if (location != null) {
-                callback.onLocationReceived(location.getLatitude(), location.getLongitude());
-            } else {
-                callback.onLocationError("Не удалось получить местоположение");
-            }
-        }).addOnFailureListener(e -> {
-            Log.e(TAG, "Ошибка получения местоположения", e);
-            callback.onLocationError("Ошибка получения местоположения: " + e.getMessage());
-        });
+        if (callback != null) {
+            fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
+                if (location != null) {
+                    callback.onLocationReceived(location.getLatitude(), location.getLongitude());
+                } else {
+                    callback.onLocationError("Не удалось получить местоположение");
+                }
+            }).addOnFailureListener(e -> {
+                Log.e(TAG, "Ошибка получения местоположения", e);
+                callback.onLocationError("Ошибка получения местоположения: " + e.getMessage());
+            });
+        }
+
     }
 }

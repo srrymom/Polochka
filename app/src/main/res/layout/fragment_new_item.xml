@@ -99,12 +99,12 @@
             <TextView
                 android:id="@+id/cityLabel"
                 android:paddingTop="10dp"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 style="@style/DefaultEditTextStyle" />
             <TextView
                 android:id="@+id/districtLabel"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 style="@style/DefaultEditTextStyle"/>
 
             <Button

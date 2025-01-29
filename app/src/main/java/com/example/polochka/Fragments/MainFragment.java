@@ -1,5 +1,6 @@
 package com.example.polochka.Fragments;
 
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,6 +47,7 @@ public class MainFragment extends Fragment implements ItemRecyclerViewAdapter.On
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         SERVER_URL = getContext().getString(R.string.server_url);
+
 
         // Инициализация фрагмента
         View view = inflater.inflate(R.layout.fragment_favorite, container, false);

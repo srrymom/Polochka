@@ -5,17 +5,17 @@
     <item
         android:id="@+id/nav_main"
         android:icon="@drawable/search"
-        android:title="Главная" />
+        android:title="@string/navMenuMainPageLabel" />
 <!--    <item android:title="Избранное"-->
 <!--        android:icon="@drawable/heart"-->
 <!--        android:id="@+id/nav_saved"/>-->
-    <item android:title="Объявление"
+    <item android:title="@string/navMenuAddItemPageLabel"
         android:icon="@drawable/add_post"
         android:id="@+id/nav_new_item"/>
 <!--    <item android:title="Сообщения"-->
 <!--        android:icon="@drawable/message"-->
 <!--        android:id="@+id/nav_messages"/>-->
-<!--    <item android:title="Профиль"-->
-<!--        android:icon="@drawable/person"-->
-<!--        android:id="@+id/nav_profile"/>-->
+    <item android:title="Профиль"
+        android:icon="@drawable/person"
+        android:id="@+id/nav_profile"/>
 </menu>

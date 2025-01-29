@@ -45,14 +45,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Описание книги: "
-                android:textSize="24dp"
+                android:textSize="24sp"
 />
 
             <TextView
                 android:id="@+id/bookDescriptionText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="20sp"
 
                 android:text="TextView" />
         </LinearLayout>
@@ -102,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Example name"
-                android:textSize="26dp"
+                android:textSize="26sp"
 
                 android:textStyle="bold" />
 
@@ -161,7 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Местоположение: "
-                    android:textSize="24dp"
+                    android:textSize="24sp"
  />
 
                 <TextView
@@ -169,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="adressText"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -209,12 +209,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Фамилия имя"
-                    android:textSize="24dp"
+                    android:textSize="24sp"
 />
 
                 <TextView
                     android:id="@+id/userNumber"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="89607670634" />

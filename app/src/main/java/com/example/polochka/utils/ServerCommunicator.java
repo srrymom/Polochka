@@ -16,7 +16,23 @@ public class ServerCommunicator {
         this.serverUrl = serverUrl;
         this.client = new OkHttpClient();
     }
+    public void regUser(JSONObject payload, Callback callback) {
+        RequestBody body = RequestBody.create(payload.toString(), MediaType.get("application/json; charset=utf-8"));
+        Request request = new Request.Builder()
+                    .url(serverUrl + "/registration")
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
 
+    public void authUser(JSONObject payload, Callback callback) {
+        RequestBody body = RequestBody.create(payload.toString(), MediaType.get("application/json; charset=utf-8"));
+        Request request = new Request.Builder()
+                .url(serverUrl + "/auth")
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
     public void sendBook(JSONObject payload, Callback callback) {
         RequestBody body = RequestBody.create(payload.toString(), MediaType.get("application/json; charset=utf-8"));
         Request request = new Request.Builder()

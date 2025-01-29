@@ -4,11 +4,12 @@ from datetime import datetime
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Form
 from pydantic import BaseModel, Field
 from sqlalchemy import String, Integer, Float, DateTime, select, text
+from passlib.context import CryptContext
 
 
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from starlette.responses import FileResponse
+from starlette.responses import FileResponse, JSONResponse
 
 # Настройка логгирования
 logging.basicConfig(level=logging.INFO)
@@ -18,6 +19,7 @@ logger = logging.getLogger(__name__)
 DATABASE_URL = "sqlite+aiosqlite:///books.db"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 engine = create_async_engine(DATABASE_URL, future=True, echo=True)
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # Фабрика для создания асинхронных сессий
 new_session = async_sessionmaker(engine, expire_on_commit=False)
@@ -33,6 +35,8 @@ async def get_session() -> AsyncSession:
 # Базовый класс для всех моделей базы данных
 class Base(DeclarativeBase):
     pass
+
+
 
 # Модель таблицы "books"
 class BookModel(Base):
@@ -50,6 +54,8 @@ class BookModel(Base):
     phone_number: Mapped[str] = mapped_column(String(20), nullable=False)
     username: Mapped[str] = mapped_column(String, nullable=True)
     image_id: Mapped[str] = mapped_column(String, nullable=True)
+
+
 
 # Pydantic модель для валидации запросов на добавление книги
 class BookRequest(BaseModel):
@@ -101,7 +107,55 @@ async def create_book(book: BookRequest, session: AsyncSession = Depends(get_ses
     logger.info(f"Добавлена книга: {new_book.title}")
     return {"status": "Book added successfully", "book_id": new_book.id}
 
-# Получение списка всех книг
+
+class UsersLoginModel(Base):
+    __tablename__ = "users"
+    username: Mapped[str] = mapped_column(String, nullable=False, primary_key=True)
+    hash_pass: Mapped[str] = mapped_column(String, nullable=False)
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+
+# Функция для хеширования пароля
+def hash_password(password: str) -> str:
+    return pwd_context.hash(password)
+
+
+# Функция для проверки пароля
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return pwd_context.verify(plain_password, hashed_password)
+
+# Регистрация нового пользователя
+@app.post("/registration")
+async def registration(data: LoginRequest, session: AsyncSession = Depends(get_session)):
+    # Проверяем, существует ли пользователь
+    existing_user = await session.get(UsersLoginModel, data.username)
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Пользователь уже существует")
+
+    # Создаем нового пользователя
+    new_user = UsersLoginModel(
+        username=data.username,
+        hash_pass=hash_password(data.password)
+    )
+
+    session.add(new_user)
+    await session.commit()
+
+    return JSONResponse(content={"status": "Успешный вход"}, status_code=200)
+
+# Авторизация пользователя
+@app.post("/auth")
+async def login(data: LoginRequest, session: AsyncSession = Depends(get_session)):
+    user = await session.get(UsersLoginModel, data.username)
+    if not user or not verify_password(data.password, user.hash_pass):
+        raise HTTPException(status_code=401, detail="Неверный логин или пароль")
+
+    return JSONResponse(content={"status": "Успешный вход"}, status_code=200)
+
+
 @app.get("/books/")
 async def get_all_books(session: AsyncSession = Depends(get_session)):
     query = select(BookModel)

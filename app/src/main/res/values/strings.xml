@@ -1,7 +1,21 @@
 <resources>
-    <string name="server_url">http://51.250.79.236:8000</string>
+    <string name="server_url">http://127.0.0.1:8000</string>
 
     <string name="app_name">Polochka</string>
     <string name="InputText">Polochka</string>
+    <string name="navMenuMainPageLabel">Главная</string>
+    <string name="navMenuAddItemPageLabel">Объявление</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="api_key">6d4f46d0-123a-47c0-b6f1-e082e11a9472</string>
 
 </resources>

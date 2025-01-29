@@ -7,12 +7,17 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Button;
 
 import com.example.polochka.Fragments.MainFragment;
 import com.example.polochka.Fragments.NewItemFragment;
+import com.example.polochka.Fragments.ProfileFragment;
+import com.example.polochka.login.LoginActivity;
 import com.example.polochka.utils.UserLocationManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.yandex.mapkit.MapKitFactory;
@@ -58,26 +63,39 @@ public class MainActivity extends AppCompatActivity  {
         // Инициализация элементов интерфейса
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-        // Установить начальный фрагмент
+        // Установка начального фрагмента
         setUpInitialFragment();
 
         // Настройка BottomNavigationView
         setUpBottomNavigation();
 
+        // Обработка кнопки "Назад"
         Button backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> {
-            // Check if the fragment stack has entries
+            // Проверяем, если в стеке фрагментов есть записи, то возвращаемся назад
             FragmentManager fragmentManager = getSupportFragmentManager();
             if (fragmentManager.getBackStackEntryCount() > 1) {
-                fragmentManager.popBackStack(); // Go back to the previous fragment
+                fragmentManager.popBackStack(); // Возвращаемся на предыдущий фрагмент
+            } else {
+                finish(); // Закрываем активность, если в стеке нет фрагментов
             }
-//            else {
-//                // Optionally, finish the activity or perform other actions
-//                backPressed(); // or finish() to close the Activity
-//            }
         });
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences sharedPreferences = this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", null);
+        boolean isLoggedIn = sharedPreferences.getBoolean("is_logged_in", false);
 
+        // Проверка, если пользователь не залогинен, переходим на экран входа
+        if (!(isLoggedIn && username != null)) {
+            Intent myIntent = new Intent(this, LoginActivity.class);
+            startActivity(myIntent);
+            finish(); // Можно завершить текущую активность, чтобы пользователь не мог вернуться
+            return; // Дальше код не выполняется
+        }
     }
 
     private void setUpBottomNavigation() {
@@ -96,8 +114,8 @@ public class MainActivity extends AppCompatActivity  {
                 return new MainFragment();
             case R.id.nav_new_item:
                 return new NewItemFragment();
-//            case R.id.nav_profile:
-//                return new ProfileFragment();
+            case R.id.nav_profile:
+                return new ProfileFragment();
 //            case R.id.nav_saved:
 //                return new FavoriteFragment();
         }
