@@ -17,5 +17,5 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="api_key">6d4f46d0-123a-47c0-b6f1-e082e11a9472</string>
-
+    <string name="google_api_key">AIzaSyCBDbmGIbHUSusZBnKLGb4xx3BZYooY7M4</string>
 </resources>

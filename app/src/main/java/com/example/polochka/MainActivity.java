@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.example.polochka.Fragments.ChooseBookFragment;
 import com.example.polochka.Fragments.MainFragment;
 import com.example.polochka.Fragments.NewItemFragment;
 import com.example.polochka.Fragments.ProfileFragment;
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity  {
             case R.id.nav_main:
                 return new MainFragment();
             case R.id.nav_new_item:
-                return new NewItemFragment();
+                return new ChooseBookFragment();
             case R.id.nav_profile:
                 return new ProfileFragment();
 //            case R.id.nav_saved:

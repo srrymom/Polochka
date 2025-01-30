@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.polochka.models.GoogleBook;
 import com.example.polochka.utils.ImageSender;
 import com.example.polochka.utils.ServerCommunicator;
 import com.example.polochka.views.CustomMapView;
@@ -50,9 +51,15 @@ public class NewItemFragment extends Fragment implements LocationDetailsListener
     public void setImageUri(Uri image_uri) {
         this.imageUri = image_uri;
     }
-
+    private GoogleBook googleBook;
     private Uri imageUri;
 
+    public NewItemFragment(GoogleBook googleBook) {
+        this.googleBook = googleBook;
+    }
+
+    public NewItemFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,6 +81,12 @@ public class NewItemFragment extends Fragment implements LocationDetailsListener
 
         mapView.start(requireContext(), requireActivity(), this);
 
+        if (googleBook != null) {
+            descriptionInput.setText(googleBook.getDescription());
+            authorInput.setText(googleBook.getAuthor());
+            titleInput.setText(googleBook.getTitle());
+
+        }
         return view;
 
     }
