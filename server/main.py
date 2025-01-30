@@ -163,7 +163,7 @@ async def get_all_books(username: Optional[str] = None, session: AsyncSession = 
     query = select(BookModel)
 
     if username:
-        query = query.where(BookModel.username == username)
+        query = query.where(BookModel.username == capitalize_first_letter(username))
 
     result = await session.execute(query)
     books = result.scalars().all()
