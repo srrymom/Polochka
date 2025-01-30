@@ -1,4 +1,4 @@
-package com.example.polochka.Fragments;
+package com.example.polochka.utils;
 
 import android.net.Uri;
 import android.util.Log;
@@ -11,9 +11,6 @@ import androidx.core.util.Consumer;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.example.polochka.utils.ImageSender;
-
-import java.util.concurrent.Callable;
 
 public class ImageHandler {
     private final Fragment fragment;

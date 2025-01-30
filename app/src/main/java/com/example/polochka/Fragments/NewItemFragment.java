@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.polochka.models.GoogleBook;
+import com.example.polochka.utils.ImageHandler;
 import com.example.polochka.utils.ImageSender;
 import com.example.polochka.utils.ServerCommunicator;
 import com.example.polochka.views.CustomMapView;
@@ -85,6 +86,7 @@ public class NewItemFragment extends Fragment implements LocationDetailsListener
             descriptionInput.setText(googleBook.getDescription());
             authorInput.setText(googleBook.getAuthor());
             titleInput.setText(googleBook.getTitle());
+
 
         }
         return view;

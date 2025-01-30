@@ -63,7 +63,7 @@ class BookModel(Base):
 class BookRequest(BaseModel):
     title: str = Field(..., max_length=100, description="Название книги")
     author: str = Field(..., max_length=100, description="Автор книги")
-    description: str = Field(..., max_length=500, description="Описание книги")
+    description: str = Field(..., max_length=1000, description="Описание книги")
     city: str = Field(..., max_length=100, description="Город, где находится книга")
     district: str = Field(None, max_length=100, description="Район города")
     latitude: float = Field(0.0, ge=-90.0, le=90.0, description="Широта местоположения книги")

@@ -5,224 +5,249 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="0dp"
         android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/llDescription"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lBookNameAuthor">
-
-<!--            <TextView-->
-<!--                android:id="@+id/itemDescriptionLabel"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="TextView"-->
-<!--                android:textStyle="bold" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/itemDescriptionText"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Raz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz Raz dvaRaz dvaRaz dvaRaz dvaRaz dva Raz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dva  dvaRazdvaRazdvaRazdvaRaz dvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazvv dva" />-->
-
-            <TextView
-                android:id="@+id/bookDescriptionLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Описание книги: "
-
-                android:textSize="24sp"
-/>
-
-            <TextView
-                android:id="@+id/bookDescriptionText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-
-                android:text="TextView" />
-        </LinearLayout>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardProductImages"
-            android:layout_width="0dp"
-            android:layout_height="350dp"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
-            app:cardCornerRadius="0dp"
-            app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:scaleType="centerCrop"
-
-                android:id="@+id/productImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </ImageView>
-
-<!--            <androidx.viewpager2.widget.ViewPager2-->
-<!--                android:id="@+id/viewPagerProductImages"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent" />-->
-        </androidx.cardview.widget.CardView>
-
-        <LinearLayout
-            android:id="@+id/lBookNameAuthor"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardProductImages">
-
-            <TextView
-                android:id="@+id/tvBookTitle"
-                style="@style/TextAppearance.MaterialComponents.Headline5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Example name"
-                android:textSize="26sp"
-                android:textFontWeight="600"
-    />
-
-            <TextView
-                android:id="@+id/tvBookAuthor"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Some author" />
-        </LinearLayout>
-
-<!--        <LinearLayout-->
-<!--            android:id="@+id/llItemButtons"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="10dp"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:layout_marginEnd="10dp"-->
-<!--            android:orientation="horizontal"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/lBookNameAuthor">-->
-
-<!--            <Button-->
-<!--                android:id="@+id/itemMessageBtn"-->
-<!--                style="@style/MessageButtonStyle"-->
-<!--                android:text="Message" />-->
-
-<!--            <Space-->
-<!--                android:layout_width="10dp"-->
-<!--                android:layout_height="0dp" />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/itemFavoriteBtn"-->
-<!--                style="@style/FavoriteButtonStyle"-->
-<!--                android:text="Save" />-->
-<!--        </LinearLayout>-->
-
-        <LinearLayout
-            android:id="@+id/Adress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/llAuthor">
-
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:id="@+id/llDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:orientation="vertical">
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lBookNameAuthor">
+
+                <!--            <TextView-->
+                <!--                android:id="@+id/itemDescriptionLabel"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:text="TextView"-->
+                <!--                android:textStyle="bold" />-->
+
+                <!--            <TextView-->
+                <!--                android:id="@+id/itemDescriptionText"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:text="Raz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz Raz dvaRaz dvaRaz dvaRaz dvaRaz dva Raz dvaRaz dvaRaz dvaRaz dvaRaz dvaRaz dva  dvaRazdvaRazdvaRazdvaRaz dvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazdvaRazvv dva" />-->
 
                 <TextView
-                    android:id="@+id/adressLabel"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/bookDescriptionLabel"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Местоположение: "
-                    android:textSize="24sp"
- />
+                    android:text="Описание книги: "
+
+                    android:textSize="24sp" />
 
                 <TextView
-                    android:id="@+id/adressText"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/bookDescriptionText"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="adressText"
+                    android:text="TextView"
+
                     android:textSize="20sp" />
             </LinearLayout>
 
-        </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardProductImages"
+                android:layout_width="0dp"
+                android:layout_height="350dp"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/llAuthor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llDescription">
+                <ImageView
+                    android:id="@+id/productImage"
 
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:cardCornerRadius="50dp">-->
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop">
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/imageView"-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="50dp"-->
-<!--                    app:shapeAppearance="@style/ShapeAppearanceOverlay.Avatar" />-->
+                </ImageView>
 
-<!--            </androidx.cardview.widget.CardView>-->
-
+                <!--            <androidx.viewpager2.widget.ViewPager2-->
+                <!--                android:id="@+id/viewPagerProductImages"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="match_parent" />-->
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:id="@+id/lBookNameAuthor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:orientation="vertical">
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardProductImages">
 
                 <TextView
-                    android:id="@+id/userName"
+                    android:id="@+id/tvBookTitle"
+                    style="@style/TextAppearance.MaterialComponents.Headline5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Фамилия имя"
-                    android:textSize="24sp"
-/>
+                    android:text="Example name"
+                    android:textFontWeight="600"
+                    android:textSize="26sp" />
 
                 <TextView
-                    android:id="@+id/userNumber"
-                    android:textSize="20sp"
+                    android:id="@+id/tvBookAuthor"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="89607670634" />
+                    android:text="Some author" />
             </LinearLayout>
 
-        </LinearLayout>
+            <!--        <LinearLayout-->
+            <!--            android:id="@+id/llItemButtons"-->
+            <!--            android:layout_width="0dp"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginStart="10dp"-->
+            <!--            android:layout_marginTop="10dp"-->
+            <!--            android:layout_marginEnd="10dp"-->
+            <!--            android:orientation="horizontal"-->
+            <!--            app:layout_constraintEnd_toEndOf="parent"-->
+            <!--            app:layout_constraintStart_toStartOf="parent"-->
+            <!--            app:layout_constraintTop_toBottomOf="@id/lBookNameAuthor">-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--            <Button-->
+            <!--                android:id="@+id/itemMessageBtn"-->
+            <!--                style="@style/MessageButtonStyle"-->
+            <!--                android:text="Message" />-->
+
+            <!--            <Space-->
+            <!--                android:layout_width="10dp"-->
+            <!--                android:layout_height="0dp" />-->
+
+            <!--            <Button-->
+            <!--                android:id="@+id/itemFavoriteBtn"-->
+            <!--                style="@style/FavoriteButtonStyle"-->
+            <!--                android:text="Save" />-->
+            <!--        </LinearLayout>-->
+
+            <LinearLayout
+                android:id="@+id/Adress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/llAuthor">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/adressLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Местоположение: "
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/adressText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="adressText"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llAuthor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llDescription">
+
+                <!--            <androidx.cardview.widget.CardView-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                app:cardCornerRadius="50dp">-->
+
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/imageView"-->
+                <!--                    android:layout_width="50dp"-->
+                <!--                    android:layout_height="50dp"-->
+                <!--                    app:shapeAppearance="@style/ShapeAppearanceOverlay.Avatar" />-->
+
+                <!--            </androidx.cardview.widget.CardView>-->
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Пользователь: "
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Номер телефона:"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/userName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Фамилия имя"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/userNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="89607670634"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/deleteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                android:text="Удалить объявление"
+                android:textColor="@android:color/holo_red_dark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Adress" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

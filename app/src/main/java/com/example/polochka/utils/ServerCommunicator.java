@@ -60,6 +60,22 @@ public class ServerCommunicator {
         client.newCall(request).enqueue(callback);
     }
 
+    public void deleteBook(int id, Callback callback) {
+        // Создание URL для удаления книги с переданным id
+        String url = serverUrl + "/books/" + id;
+
+        // Строим запрос с методом DELETE
+        Request request = new Request.Builder()
+                .url(url)  // URL, включающий ID книги
+                .delete()  // Указываем метод DELETE
+                .build();
+
+        client.newCall(request).enqueue(callback);
+
+    }
+
+
+
     public void getBooksFromServer(Activity activity, Context context, Consumer<ArrayList<ItemModel>> consumer) {
         fetchBooks(serverUrl + "/books", activity, context, consumer);
     }
