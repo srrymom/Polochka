@@ -79,12 +79,6 @@
 
 
             <EditText
-                android:id="@+id/userNameInput"
-
-                style="@style/DefaultEditTextStyle"
-                android:hint="Как к вам обращаться" />
-
-            <EditText
                 android:id="@+id/userNumberInput"
                 style="@style/DefaultEditTextStyle"
                 android:hint="Номер телефона"

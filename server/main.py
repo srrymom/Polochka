@@ -1,6 +1,8 @@
 import logging
 import os
 from datetime import datetime
+from typing import Optional
+
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Form
 from pydantic import BaseModel, Field
 from sqlalchemy import String, Integer, Float, DateTime, select, text
@@ -157,15 +159,20 @@ async def login(data: LoginRequest, session: AsyncSession = Depends(get_session)
 
 
 @app.get("/books/")
-async def get_all_books(session: AsyncSession = Depends(get_session)):
+async def get_all_books(username: Optional[str] = None, session: AsyncSession = Depends(get_session)):
     query = select(BookModel)
+
+    if username:
+        query = query.where(BookModel.username == username)
+
     result = await session.execute(query)
     books = result.scalars().all()
-
     if not books:
-        raise HTTPException(status_code=404, detail="No books found.")
+        raise HTTPException(status_code=204, detail="No books found.")
 
     return {"books": [book.__dict__ for book in books]}
+
+
 
 @app.delete("/books/{book_id}")
 async def delete_book(book_id: int, session: AsyncSession = Depends(get_session)):

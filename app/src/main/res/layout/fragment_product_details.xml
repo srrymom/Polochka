@@ -45,6 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Описание книги: "
+
                 android:textSize="24sp"
 />
 
@@ -103,8 +104,8 @@
                 android:layout_height="wrap_content"
                 android:text="Example name"
                 android:textSize="26sp"
-
-                android:textStyle="bold" />
+                android:textFontWeight="600"
+    />
 
             <TextView
                 android:id="@+id/tvBookAuthor"

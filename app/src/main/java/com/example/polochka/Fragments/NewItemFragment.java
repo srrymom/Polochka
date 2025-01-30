@@ -2,6 +2,8 @@ package com.example.polochka.Fragments;
 
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -35,7 +37,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class NewItemFragment extends Fragment implements LocationDetailsListener {
-    private EditText userNameInput, userNumberInput, titleInput, authorInput, descriptionInput;
+    private EditText  userNumberInput, titleInput, authorInput, descriptionInput;
     private TextView cityLabel, districtLabel;
     private Button submitButton, btnPickImage;
     private ImageView previewImage;
@@ -61,7 +63,7 @@ public class NewItemFragment extends Fragment implements LocationDetailsListener
 
         // Инициализация
         initializeViews(view);
-        serverCommunicator = new ServerCommunicator(getContext().getString(R.string.server_url));
+        serverCommunicator = new ServerCommunicator(requireContext());
         ImageHandler imageHandler = new ImageHandler(this, previewImage, this::setImageUri);
 
         imageSender = new ImageSender(requireContext(), requireActivity());
@@ -84,7 +86,6 @@ public class NewItemFragment extends Fragment implements LocationDetailsListener
         cityLabel = view.findViewById(R.id.cityLabel);
         districtLabel = view.findViewById(R.id.districtLabel);
         userNumberInput = view.findViewById(R.id.userNumberInput);
-        userNameInput = view.findViewById(R.id.userNameInput);
         btnPickImage = view.findViewById(R.id.addPicButton);
         previewImage = view.findViewById(R.id.imagePreview);
         mapView = view.findViewById(R.id.mapview);
@@ -92,18 +93,20 @@ public class NewItemFragment extends Fragment implements LocationDetailsListener
 
 
     private void sendBookToServer() {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("username", null);
+
         // Сбор данных
         String title = titleInput.getText().toString().trim();
         String author = authorInput.getText().toString().trim();
         String description = descriptionInput.getText().toString().trim();
         String city = cityLabel.getText().toString().trim();
         String district = districtLabel.getText().toString().trim();
-        String userName = userNameInput.getText().toString().trim();
         String userNumber = userNumberInput.getText().toString().trim();
         double latitude = mapView.getLatitude();
         double longitude = mapView.getLongitude();
 
-        if (validateInputs(title, author, description, userName, userNumber)) {
+        if (validateInputs(title, author, description, userNumber)) {
             Toast.makeText(getContext(), "Все поля должны быть заполнены", Toast.LENGTH_SHORT).show();
             return;
         }

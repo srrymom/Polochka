@@ -39,7 +39,7 @@ public class FavoriteFragment extends Fragment  implements ItemRecyclerViewAdapt
         View view = inflater.inflate(R.layout.fragment_favorite, container, false);
 
         // Инициализация RecyclerView
-        recyclerView = view.findViewById(R.id.favoriteRecyclerView);
+        recyclerView = view.findViewById(R.id.itemsRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
         // Инициализация списка избранных элементов

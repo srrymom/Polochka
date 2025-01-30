@@ -48,7 +48,7 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
-        serverCommunicator = new ServerCommunicator(getContext().getString(R.string.server_url));
+        serverCommunicator = new ServerCommunicator(requireContext());
 
         loginInput = view.findViewById(R.id.loginInput);
         passwordInput = view.findViewById(R.id.passwordInput);
