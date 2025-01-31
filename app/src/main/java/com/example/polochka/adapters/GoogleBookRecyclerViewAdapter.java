@@ -51,12 +51,23 @@ public class GoogleBookRecyclerViewAdapter extends RecyclerView.Adapter<GoogleBo
         holder.titleTextView.setText(item.getTitle());
         holder.authorTextView.setText(item.getAuthor());
 
-        Glide.with(this.context)
-                .load(item.getThumbnail().replace("http://", "https://")) // Заменяем http на https
-                .placeholder(R.drawable.small_book_placeholder2)  // Укажите ресурс изображения для плейсхолдера
-                .diskCacheStrategy(DiskCacheStrategy.NONE)  // Отключить кэширование
+        String thumbnailUrl = item.getThumbnail();
 
-                .into(holder.previewImage);
+        // Проверяем, не null ли thumbnailUrl
+        if (thumbnailUrl != null && !thumbnailUrl.isEmpty()) {
+            // Заменяем http на https и загружаем изображение
+            Glide.with(this.context)
+                    .load(thumbnailUrl.replace("http://", "https://"))
+                    .placeholder(R.drawable.small_book_placeholder2)  // Плейсхолдер
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)  // Отключаем кэширование
+                    .into(holder.previewImage);
+        } else {
+            // Если URL не задан, используем только плейсхолдер
+            Glide.with(this.context)
+                    .load(R.drawable.small_book_placeholder2)  // Только плейсхолдер
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)  // Отключаем кэширование
+                    .into(holder.previewImage);
+        }
 
         // Устанавливаем обработчик клика для элемента
         holder.itemView.setOnClickListener(v -> listener.onItemClick(item)); // Передаем выбранный элемент
