@@ -40,7 +40,6 @@ public class GoogleBooksApiFacade {
         String requestUrl = "https://www.googleapis.com/books/v1/volumes?q=" + Uri.encode(prompt) + "&key=" + apiKey;
         fetchBooks(requestUrl, activity, context, consumer);
     }
-
     private void fetchBooks(String url, Activity activity, Context context, Consumer<ArrayList<GoogleBook>> consumer) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(url).build();

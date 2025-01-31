@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -40,7 +41,7 @@ public class ChooseBookFragment extends Fragment implements GoogleBookRecyclerVi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view =  inflater.inflate(R.layout.fragment_choose_book, container, false);
         searchBtn = view.findViewById(R.id.findButton);
         searchText = view.findViewById(R.id.searchField);
@@ -52,7 +53,13 @@ public class ChooseBookFragment extends Fragment implements GoogleBookRecyclerVi
         googleBooksApiFacade = new GoogleBooksApiFacade(requireContext());
         skipBtn.setOnClickListener(v -> skip());
         searchBtn.setOnClickListener(v -> FindBooks());
-
+        searchText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE) {
+                FindBooks(); // Вызываем тот же метод, что и у кнопки
+                return true; // Закрываем клавиатуру
+            }
+            return false;
+        });
         return view;
     }
 

@@ -21,7 +21,6 @@ import com.example.polochka.models.ItemModel;
 import com.example.polochka.utils.ServerCommunicator;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Objects;
 
 import okhttp3.Call;
