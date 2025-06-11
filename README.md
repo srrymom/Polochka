@@ -1,5 +1,3 @@
-# Работа 4
-
 
 
 https://github.com/user-attachments/assets/0ad5cd82-0afd-469b-a8a1-5c63f5beadcd
